@@ -32,7 +32,7 @@ stages:
         - task: PublishBuildArtifacts@1
           displayName: Publish Artifacts
           inputs:
-            PathtoPublish: '$(Build.ArtifactStagingDirectory)/build'
+            PathtoPublish: '$(System.DefaultWorkingDirectory)/build'
             ArtifactName: 'ToDoUI'
             publishLocation: 'Container'
         
