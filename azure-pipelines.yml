@@ -13,15 +13,16 @@ stages:
         displayName: Scanning from SonarQube
         steps:
         - task: SonarQubePrepare@8
+          displayName: SonarQube Prepare
           inputs:
             SonarQube: 'SonarSVC'
             scannerMode: 'cli'
             configMode: 'manual'
-            cliProjectKey: 'India@123456'
+            cliProjectKey: 'Todoapp'
             cliProjectName: 'Todoapp'
             cliSources: '.'
             extraProperties: |
-              sonar.projectKey= India@123456
+              sonar.projectKey=Todoapp
               sonar.projectName=Todoapp
               sonar.sources=.
         - task: SonarQubeAnalyze@8
