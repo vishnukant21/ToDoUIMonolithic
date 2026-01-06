@@ -21,7 +21,10 @@ stages:
             cliProjectKey: 'Todoapp01'
             cliProjectName: 'Todoapp01'
             cliSources: '.'
-
+            extraProperties: |
+              sonar.projectKey=Todoapp01
+              sonar.projectName=Todoapp01
+              sonar.sources=.
         - task: SonarQubeAnalyze@8
           inputs:
             jdkversion: 'JAVA_HOME_17_X64'
