@@ -18,8 +18,8 @@ stages:
             SonarQube: 'SonarSVC'
             scannerMode: 'cli'
             configMode: 'manual'
-            cliProjectKey: 'Todoapp'
-            cliProjectName: 'Todoapp'
+            cliProjectKey: 'Todoapp01'
+            cliProjectName: 'Todoapp01'
             cliSources: '.'
 
         - task: SonarQubeAnalyze@8
