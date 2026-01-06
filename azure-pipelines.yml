@@ -6,6 +6,31 @@ trigger:
 pool: piluagent
 
 stages:
+  - stage: scanningfromsonarqube
+    displayName: Scanning from SonarQube
+    jobs:
+      - job: scanningfromsonarqube
+        displayName: Scanning from SonarQube
+        steps:
+        - task: SonarQubePrepare@8
+          inputs:
+            SonarQube: 'SonarSVC'
+            scannerMode: 'cli'
+            configMode: 'manual'
+            cliProjectKey: 'India@123456'
+            cliProjectName: 'Todoapp'
+            cliSources: '.'
+            extraProperties: |
+              sonar.projectKey= India@123456
+              sonar.projectName=Todoapp
+              sonar.sources=.
+        - task: SonarQubeAnalyze@8
+          inputs:
+            jdkversion: 'JAVA_HOME_21_X64'
+        - task: SonarQubePublish@8
+          inputs:
+            pollingTimeoutSec: '300'
+
   - stage: appbuild
     displayName: App Build
     jobs:
