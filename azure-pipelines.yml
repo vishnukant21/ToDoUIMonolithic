@@ -16,9 +16,8 @@ stages:
           inputs:
             targetType: 'inline'
             script: |
-              Invoke-WebRequest -Uri "https://github.com/biomejs/biome/releases/download/%40biomejs%2Fbiome%402.3.8/biome-win32-x64.exe" -OutFile "$(Agent.ToolsDirectory)\biome.exe"
-              & "$(Agent.ToolsDirectory)\biome.exe" lint "$(System.DefaultWorkingDirectory)" --no-errors-on-unmatched
-
+              Invoke-WebRequest -Uri "https://github.com/biomejs/biome/releases/download/%40biomejs%2Fbiome%402.3.8/biome-win32-x64.exe" -OutFile "$(Agent.ToolsDirectory)/biome.exe"
+              $(Agent.ToolsDirectory)/biome.exe lint $(System.DefaultWorkingDirectory)/src/
 
   # - stage: stylelintCSScodequalitycheck
   #   displayName: Stylelint CSS code quality check
