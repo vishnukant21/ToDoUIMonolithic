@@ -3,7 +3,7 @@ trigger:
     include:
       - main
 
-pool: piluagent
+pool: newagent
 
 stages:
   - stage: scanningfromsonarqube
@@ -12,25 +12,12 @@ stages:
       - job: scanningfromsonarqube
         displayName: Scanning from SonarQube
         steps:
-        - task: SonarQubePrepare@8
-          displayName: SonarQube Prepare
+        - task: PowerShell@2
           inputs:
-            SonarQube: 'SonarSVC'
-            scannerMode: 'cli'
-            configMode: 'manual'
-            cliProjectKey: 'Todoapp01'
-            cliProjectName: 'Todoapp01'
-            cliSources: '.'
-            extraProperties: |
-              sonar.projectKey=Todoapp01
-              sonar.projectName=Todoapp01
-              sonar.sources=.
-        - task: SonarQubeAnalyze@8
-          inputs:
-            jdkversion: 'JAVA_HOME_17_X64'
-        - task: SonarQubePublish@8
-          inputs:
-            pollingTimeoutSec: '300'
+            targetType: 'inline'
+            script: |
+              npm install -g stylelint stylelint-config-standard
+              stylelint "$(System.DefaultWorkingDirectory)/src/**/*.css"
 
   - stage: appbuild
     displayName: App Build
