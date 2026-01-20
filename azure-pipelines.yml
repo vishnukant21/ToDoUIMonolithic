@@ -16,8 +16,8 @@ stages:
           inputs:
             targetType: 'inline'
             script: |
-              python -m pip install --user yamllint
-              python -m yamllint "$(System.DefaultWorkingDirectory)" --format parsable
+              pip install --user yamllint
+              yamllint $(System.DefaultWorkingDirectory)
 
   # - stage: stylelintCSScodequalitycheck
   #   displayName: Stylelint CSS code quality check
