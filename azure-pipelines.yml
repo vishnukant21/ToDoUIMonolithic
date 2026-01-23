@@ -1,23 +1,29 @@
-trigger:
-  branches:
-    include:
-      - main
+trigger: none
+  # branches:
+  #   include:
+  #     - main
 
 pool: newagent
 
 stages:
-  - stage: lintbiome
-    displayName: Lint Biome
+  - stage: SonarQubecodeQuality
+    displayName: SonarQube Code Quality check
     jobs:
-      - job: lintbiome
-        displayName: Lint Biome
+      - job: SonarQubecodeQuality
+        displayName: SonarQube Code Quality check
         steps:
-        - task: PowerShell@2
+        - task: SonarQubePrepare@8
           inputs:
-            targetType: 'inline'
-            script: |
-              python -m pip install --user yamllint
-              python -m yamllint C:\agent1\_work\2\s
+            SonarQube: 'SonarSVC'
+            scannerMode: 'cli'
+            configMode: 'manual'
+            cliProjectKey: 'To-do-App'
+            cliProjectName: 'To-do-App'
+            cliSources: '.'
+            extraProperties: |
+              sonar.projectKey=To-do-App
+              sonar.projectName=To-do-App
+              sonar.sources=.
 
   # - stage: stylelintCSScodequalitycheck
   #   displayName: Stylelint CSS code quality check
