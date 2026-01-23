@@ -24,6 +24,7 @@ stages:
               sonar.projectKey=To-do-App
               sonar.projectName=To-do-App
               sonar.sources=.
+              sonar.branch.name=
         - task: SonarQubeAnalyze@8
           inputs:
             jdkversion: 'JAVA_HOME_17_X64'
@@ -31,7 +32,6 @@ stages:
           inputs:
             pollingTimeoutSec: '300'
         
-
   # - stage: stylelintCSScodequalitycheck
   #   displayName: Stylelint CSS code quality check
   #   jobs:
