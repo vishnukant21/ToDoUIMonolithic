@@ -86,12 +86,12 @@ stages:
           inputs:
               buildType: 'current'
               downloadType: 'single'
-              artifactName: 'appArtifacts'
+              artifactName: 'ToDoUI'
               downloadPath: '$(Pipeline.Workspace)'
         - task: CopyFilesOverSSH@0
           inputs:
             sshEndpoint: 'connectnew'
-            sourceFolder: '$(Pipeline.Workspace)/appArtifacts'
+            sourceFolder: '$(Pipeline.Workspace)/ToDoUI'
             contents: '**'
             targetFolder: '/home/azureuser/app'
             readyTimeout: '20000'
