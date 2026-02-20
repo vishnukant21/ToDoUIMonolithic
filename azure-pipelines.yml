@@ -82,14 +82,16 @@ stages:
       - job: deployment
         displayName: Deployment
         steps:
-        - task: DownloadPipelineArtifact@2
+        - task: DownloadBuildArtifacts@0
           inputs:
-            buildType: 'current'
-            targetPath: '$(Pipeline.Workspace)'
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'appArtifacts'
+              downloadPath: '$(Pipeline.Workspace)'
         - task: CopyFilesOverSSH@0
           inputs:
             sshEndpoint: 'connectnew'
-            sourceFolder: '$(System.DefaultWorkingDirectory)'
+            sourceFolder: '$(Pipeline.Workspace)/appArtifacts'
             contents: '**'
             targetFolder: '/home/azureuser/app'
             readyTimeout: '20000'
