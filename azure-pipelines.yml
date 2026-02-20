@@ -75,4 +75,22 @@ stages:
             PathtoPublish: '$(System.DefaultWorkingDirectory)/build'
             ArtifactName: 'ToDoUI'
             publishLocation: 'Container'
+
+  - stage: deployments
+    displayName: Deployment 
+    jobs:
+      - job: deployment
+        displayName: Deployment
+        steps:
+        - task: DownloadPipelineArtifact@2
+          inputs:
+            buildType: 'current'
+            targetPath: '$(Pipeline.Workspace)'
+        - task: CopyFilesOverSSH@0
+          inputs:
+            sshEndpoint: 'connectnew'
+            sourceFolder: '$(System.DefaultWorkingDirectory)'
+            contents: '**'
+            targetFolder: '/home/azureuser/app'
+            readyTimeout: '20000'
         
