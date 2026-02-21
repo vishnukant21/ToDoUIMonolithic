@@ -77,22 +77,40 @@ stages:
             publishLocation: 'Container'
 
   - stage: deployments
-    displayName: Deployment 
+    displayName: Diployments todoui
     jobs:
-      - job: deployment
-        displayName: Deployment
-        steps:
-        - task: DownloadBuildArtifacts@0
-          inputs:
-              buildType: 'current'
-              downloadType: 'single'
-              artifactName: 'ToDoUI'
-              downloadPath: '$(Pipeline.Workspace)'
-        - task: CopyFilesOverSSH@0
-          inputs:
-            sshEndpoint: 'connectnew'
-            sourceFolder: '$(Pipeline.Workspace)/ToDoUI'
-            contents: '**'
-            targetFolder: '/home/azureuser/app'
-            readyTimeout: '20000'
+      - deployment: Deployments
+        displayName: Deployments todoui
+        environment: 
+         name: vm-env
+        strategy:
+          runOnce:
+              deploy:
+                steps:
+                - task: DownloadPipelineArtifact@2
+                  inputs:
+                    buildType: 'current'
+                    artifactName: Deployment Artifact
+                    targetPath: '/home/azureuser/todoui'
+            
+
+  # - stage: deployments
+  #   displayName: Deployment 
+  #   jobs:
+  #     - job: deployment
+  #       displayName: Deployment
+  #       steps:
+  #       - task: DownloadBuildArtifacts@0
+  #         inputs:
+  #             buildType: 'current'
+  #             downloadType: 'single'
+  #             artifactName: 'ToDoUI'
+  #             downloadPath: '$(Pipeline.Workspace)'
+  #       - task: CopyFilesOverSSH@0
+  #         inputs:
+  #           sshEndpoint: 'connectnew'
+  #           sourceFolder: '$(Pipeline.Workspace)/ToDoUI'
+  #           contents: '**'
+  #           targetFolder: '/home/azureuser/app'
+  #           readyTimeout: '20000'
         
