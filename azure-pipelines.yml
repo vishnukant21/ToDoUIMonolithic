@@ -94,7 +94,7 @@ stages:
                   inputs:
                     buildType: 'current'
                     artifactName: 'ToDoUI'
-                    targetPath: '/home/azureuser/todoui'
+                    targetPath: '/var/www/html'
             
 
   # - stage: deployments
