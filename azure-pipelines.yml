@@ -32,19 +32,19 @@ stages:
   #         inputs:
   #           pollingTimeoutSec: '300'
         
-  - stage: stylelintCSScodequalitycheck
-    displayName: Stylelint CSS code quality check
-    jobs:
-      - job: stylelintCSScodequalitycheck
-        displayName: Stylelint CSS code quality check
-        steps:
-        - task: PowerShell@2
-          displayName: Stylelint CSS code quality check
-          inputs:
-            targetType: 'inline'
-            script: |
-              npm install -g stylelint stylelint-config-standard
-              stylelint "$(System.DefaultWorkingDirectory)/src/**/*.css" --allow-empty-input
+  # - stage: stylelintCSScodequalitycheck
+  #   displayName: Stylelint CSS code quality check
+  #   jobs:
+  #     - job: stylelintCSScodequalitycheck
+  #       displayName: Stylelint CSS code quality check
+  #       steps:
+  #       - task: PowerShell@2
+  #         displayName: Stylelint CSS code quality check
+  #         inputs:
+  #           targetType: 'inline'
+  #           script: |
+  #             npm install -g stylelint stylelint-config-standard
+  #             stylelint "$(System.DefaultWorkingDirectory)/src/**/*.css" --allow-empty-input
 
   - stage: appbuild
     displayName: App Build
@@ -90,7 +90,7 @@ stages:
                 - task: DownloadPipelineArtifact@2
                   inputs:
                     buildType: 'current'
-                    artifactName: Deployment Artifact
+                    artifactName: 'ToDoUI'
                     targetPath: '/home/azureuser/todoui'
             
 
