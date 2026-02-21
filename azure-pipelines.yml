@@ -70,8 +70,7 @@ stages:
             workingDir: '$(System.DefaultWorkingDirectory)'
             customCommand: 'run build'
 
-        - task: PublishPipelineArtifact@1
-          displayName: Publish Artifacts
+        - task: PublishBuildArtifacts@1
           inputs:
             PathtoPublish: '$(System.DefaultWorkingDirectory)/build'
             ArtifactName: 'ToDoUI'
