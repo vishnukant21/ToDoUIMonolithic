@@ -46,35 +46,36 @@ stages:
   #             npm install -g stylelint stylelint-config-standard
   #             stylelint "$(System.DefaultWorkingDirectory)/src/**/*.css" --allow-empty-input
 
-  # - stage: appbuild
-  #   displayName: App Build
-  #   jobs:
-  #     - job: appbuild
-  #       displayName: App Build
-  #       steps:
-  #       - task: NodeTool@0
-  #         displayName: Node Installer
-  #         inputs:
-  #           versionSource: 'spec'
-  #           versionSpec: '16.x'
-  #       - task: Npm@1
-  #         displayName: NPM Install
-  #         inputs:
-  #           command: 'install'
-  #           workingDir: '$(System.DefaultWorkingDirectory)'
+  - stage: appbuild
+    displayName: App Build
+    jobs:
+      - job: appbuild
+        displayName: App Build
+        steps:
+        - task: NodeTool@0
+          displayName: Node Installer
+          inputs:
+            versionSource: 'spec'
+            versionSpec: '16.x'
+        - task: Npm@1
+          displayName: NPM Install
+          inputs:
+            command: 'install'
+            workingDir: '$(System.DefaultWorkingDirectory)'
             
-  #       - task: Npm@1
-  #         displayName: NPM Build
-  #         inputs:
-  #           command: 'custom'
-  #           workingDir: '$(System.DefaultWorkingDirectory)'
-  #           customCommand: 'run build'
-  #       - task: PublishBuildArtifacts@1
-  #         displayName: Publish Artifacts
-  #         inputs:
-  #           PathtoPublish: '$(System.DefaultWorkingDirectory)/build'
-  #           ArtifactName: 'ToDoUI'
-  #           publishLocation: 'Container'
+        - task: Npm@1
+          displayName: NPM Build
+          inputs:
+            command: 'custom'
+            workingDir: '$(System.DefaultWorkingDirectory)'
+            customCommand: 'run build'
+
+        - task: PublishPipelineArtifact@1
+          displayName: Publish Artifacts
+          inputs:
+            PathtoPublish: '$(System.DefaultWorkingDirectory)/build'
+            ArtifactName: 'ToDoUI'
+            publishLocation: 'Container'
 
   - stage: deployments
     displayName: Diployments todoui
